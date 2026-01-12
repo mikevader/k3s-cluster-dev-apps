@@ -21,4 +21,4 @@ spec:
             key: access-token
       selector:
         dnsZones:
-          - 'framsburg.ch'
+          - 'framsburg.dev'

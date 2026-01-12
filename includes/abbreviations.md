@@ -1,2 +1,0 @@
-* [CSI]: Container Storage Interface
-* [IOMMU]: Input-Output Memory Management Unit. Used to virualize memory access for devices. See [Wikipedia](https://en.wikipedia.org/wiki/Input–output_memory_management_unit)

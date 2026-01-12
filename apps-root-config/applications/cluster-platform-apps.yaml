@@ -32,8 +32,6 @@ applications:
     helmServerSideApply: true
   headlamp: {}
   reloader: {}
-  renovate: {}
-  sloth: {}
   # tracing: {}
   vault:
     serverSideDiff: true

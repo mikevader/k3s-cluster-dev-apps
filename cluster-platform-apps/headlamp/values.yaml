@@ -39,11 +39,11 @@ headlamp:
       traefik.ingress.kubernetes.io/router.middlewares: headlamp-forward-headers@kubernetescrd
     ingressClassName: traefik
     hosts:
-      - host: headlamp.framsburg.ch
+      - host: headlamp.framsburg.dev
         paths:
           - path: /
             type: ImplementationSpecific
     tls:
-      - secretName: headlamp-framsburg-ch-tls
+      - secretName: headlamp-framsburg-dev-tls
         hosts:
-          - headlamp.framsburg.ch
+          - headlamp.framsburg.dev

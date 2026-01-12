@@ -22,6 +22,6 @@ longhorn:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       traefik.ingress.kubernetes.io/router.middlewares: longhorn-system-svc-longhorn-headers@kubernetescrd,authentik-authentik@kubernetescrd
-    host: longhorn.framsburg.ch
+    host: longhorn.framsburg.dev
     tls: true
-    tlsSecret: longhorn-framsburg-ch-tls
+    tlsSecret: longhorn-framsburg-dev-tls

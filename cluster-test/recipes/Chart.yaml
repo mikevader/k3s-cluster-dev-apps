@@ -1,8 +1,0 @@
-apiVersion: v2
-name: recipes
-description: Recipes is a Django application to manage, tag and search recipes using either built in models or external storage providers hosting PDF's, Images or other files.
-version: 1.0.0
-dependencies:
-  - name: recipes
-    version: 6.7.3
-    repository: https://mikevader.github.io/charts

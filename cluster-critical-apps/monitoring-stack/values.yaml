@@ -79,10 +79,10 @@ kube-prometheus-stack:
       GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
       GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
       GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email"
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://authentik.framsburg.ch/application/o/authorize/"
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://authentik.framsburg.ch/application/o/token/"
-      GF_AUTH_GENERIC_OAUTH_API_URL: "https://authentik.framsburg.ch/application/o/userinfo/"
-      GF_AUTH_SIGNOUT_REDIRECT_URL: "https://authentik.framsburg.ch/if/session-end/grafana/"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://authentik.framsburg.dev/application/o/authorize/"
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://authentik.framsburg.dev/application/o/token/"
+      GF_AUTH_GENERIC_OAUTH_API_URL: "https://authentik.framsburg.dev/application/o/userinfo/"
+      GF_AUTH_SIGNOUT_REDIRECT_URL: "https://authentik.framsburg.dev/if/session-end/grafana/"
       # Optionally enable auto-login (bypasses Grafana login screen)
       # GF_AUTH_OAUTH_AUTO_LOGIN: "true"
       # Optionally map user groups to Grafana roles
@@ -104,11 +104,11 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
-        - grafana.framsburg.ch
+        - grafana.framsburg.dev
       tls:
-        - secretName: grafana-framsburg-ch-tls
+        - secretName: grafana-framsburg-dev-tls
           hosts:
-            - grafana.framsburg.ch
+            - grafana.framsburg.dev
 
     persistence:
       type: sts
@@ -213,7 +213,7 @@ kube-prometheus-stack:
           datasource: Prometheus
     grafana.ini:
       server:
-        root_url: https://grafana.framsburg.ch
+        root_url: https://grafana.framsburg.dev
       date_formats:
         use_browser_locale: true
         default_timezone: 'Europe/Zurich'
@@ -348,21 +348,21 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
-        - alertmanager.framsburg.ch
+        - alertmanager.framsburg.dev
       tls:
-        - secretName: alertmanager-framsburg-ch-tls
+        - secretName: alertmanager-framsburg-dev-tls
           hosts:
-            - alertmanager.framsburg.ch
+            - alertmanager.framsburg.dev
  
     alertmanagerSpec:
       secrets:
         - slack-api-url
         - opsgenie
-      externalUrl: https://alertmanager.framsburg.ch
+      externalUrl: https://alertmanager.framsburg.dev
 
   prometheus:
     prometheusSpec:
-      externalUrl: https://prometheus.framsburg.ch
+      externalUrl: https://prometheus.framsburg.dev
       ruleSelector:
         matchLabels: null
       serviceMonitorSelector:
@@ -373,25 +373,6 @@ kube-prometheus-stack:
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
-      additionalScrapeConfigs:
-        - job_name: minio-job
-          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4NDc0NTYxNDEsImlzcyI6InByb21ldGhldXMiLCJzdWIiOiJhZG1pbiJ9.BSoeoQwnQjYWIbllH5Wl4aEMp3QftAJ3cyIXY_YzV8EwKWwCGIgxaiWMfSsSqobelwz9I6j79Zj8ng8yblG5nQ # If you get into my network you're allowed to access my buckets ;)
-          metrics_path: /minio/v2/metrics/cluster
-          scheme: https
-          static_configs:
-            - targets: [minio.framsburg.net]
-        - job_name: minio-job-node
-          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4NDc0NTYxNDEsImlzcyI6InByb21ldGhldXMiLCJzdWIiOiJhZG1pbiJ9.BSoeoQwnQjYWIbllH5Wl4aEMp3QftAJ3cyIXY_YzV8EwKWwCGIgxaiWMfSsSqobelwz9I6j79Zj8ng8yblG5nQ # If you get into my network you're allowed to access my buckets ;)
-          metrics_path: /minio/v2/metrics/node
-          scheme: https
-          static_configs:
-            - targets: [minio.framsburg.net]
-        - job_name: minio-job-bucket
-          bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4NDc0NTYxNDEsImlzcyI6InByb21ldGhldXMiLCJzdWIiOiJhZG1pbiJ9.BSoeoQwnQjYWIbllH5Wl4aEMp3QftAJ3cyIXY_YzV8EwKWwCGIgxaiWMfSsSqobelwz9I6j79Zj8ng8yblG5nQ # If you get into my network you're allowed to access my buckets ;)
-          metrics_path: /minio/v2/metrics/bucket
-          scheme: https
-          static_configs:
-            - targets: [minio.framsburg.net]
       enableAdminAPI: true
       retentionSize: 100GB
       retention: 90d
@@ -457,11 +438,11 @@ kube-prometheus-stack:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
-        - prometheus.framsburg.ch
+        - prometheus.framsburg.dev
       tls:
-        - secretName: prometheus-framsburg-ch-tls
+        - secretName: prometheus-framsburg-dev-tls
           hosts:
-            - prometheus.framsburg.ch
+            - prometheus.framsburg.dev
 
     # thanosIngress:
     #   enabled: true
@@ -470,8 +451,8 @@ kube-prometheus-stack:
     #     cert-manager.io/cluster-issuer: letsencrypt-prod
     #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     #   hosts:
-    #     - thanos.framsburg.ch
+    #     - thanos.framsburg.dev
     #   tls:
-    #     - secretName: thanos-framsburg-ch-tls
+    #     - secretName: thanos-framsburg-dev-tls
     #       hosts:
-    #         - thanos.framsburg.ch
+    #         - thanos.framsburg.dev

@@ -24,26 +24,26 @@ traefik:
     enabled: false
     accessMode: ReadWriteMany
 
-  certificatesResolvers:
-    letsencrypt:
-      acme:
-        # caserver: https://acme-staging-v02.api.letsencrypt.org/directory
-        email: mmuehlebach+acme@gmail.com
-        dnsChallenge:
-          provider: digitalocean
-          delayBeforeCheck: 0
-          disablepropagationcheck: true
-          resolvers:
-            - "1.1.1.1:53"
-            - "8.8.8.8:53"
-        storage: /data/acme.json
+#  certificatesResolvers:
+#    letsencrypt:
+#      acme:
+#        # caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+#        email: mmuehlebach+acme@gmail.com
+#        dnsChallenge:
+#          provider: digitalocean
+#          delayBeforeCheck: 0
+#          disablepropagationcheck: true
+#          resolvers:
+#            - "1.1.1.1:53"
+#            - "8.8.8.8:53"
+#        storage: /data/acme.json
 
   env:
-    - name: DO_AUTH_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: digitalocean-token
-          key: access-token
+#    - name: DO_AUTH_TOKEN
+#      valueFrom:
+#        secretKeyRef:
+#          name: digitalocean-token
+#          key: access-token
     - name: DO_TTL
       value: "60"
     - name: DO_PROPAGATION_TIMEOUT
@@ -167,7 +167,7 @@ traefik:
       enabled: true
       entryPoints: ["websecure"]
       tls:
-        secretName: traefik-framsburg-ch-tls
+        secretName: traefik-framsburg-dev-tls
   ingressClass:
     enabled: true
     isDefaultClass: true

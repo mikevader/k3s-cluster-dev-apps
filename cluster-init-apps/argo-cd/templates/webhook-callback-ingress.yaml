@@ -8,7 +8,7 @@
 {{/*spec:*/}}
 {{/*  ingressClassName: traefik*/}}
 {{/*  rules:*/}}
-{{/*    - host: argocd-callback.framsburg.ch*/}}
+{{/*    - host: argocd-callback.framsburg.dev*/}}
 {{/*      http:*/}}
 {{/*        paths:*/}}
 {{/*          - path: /api/webhook*/}}
@@ -20,5 +20,5 @@
 {{/*                  name: http*/}}
 {{/*  tls:*/}}
 {{/*    - hosts:*/}}
-{{/*      - argocd-callback.framsburg.ch*/}}
-{{/*      secretName: argocd-callback-framsburg-ch-tls*/}}
+{{/*      - argocd-callback.framsburg.dev*/}}
+{{/*      secretName: argocd-callback-framsburg-dev-tls*/}}

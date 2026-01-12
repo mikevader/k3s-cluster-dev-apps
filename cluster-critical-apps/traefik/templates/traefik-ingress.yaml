@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: traefik.framsburg.ch
+    - host: traefik.framsburg.dev
       http:
         paths:
           - pathType: Prefix
@@ -22,5 +22,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-      - traefik.framsburg.ch
-      secretName: traefik-framsburg-ch-tls
+      - traefik.framsburg.dev
+      secretName: traefik-framsburg-dev-tls

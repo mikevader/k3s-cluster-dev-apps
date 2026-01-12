@@ -1,9 +1,0 @@
----
-apiVersion: v2
-name: tautulli
-description: A Python based monitoring and tracking tool for Plex Media Server
-version: 1.0.0
-dependencies:
-  - name: tautulli
-    version: 11.6.3
-    repository: https://mikevader.github.io/charts

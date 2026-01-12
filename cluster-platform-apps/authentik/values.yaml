@@ -31,10 +31,10 @@ authentik:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
-        - 'authentik.framsburg.ch'
+        - 'authentik.framsburg.dev'
       tls:
-        - secretName: 'authentik-framsburg-ch-tls'
-          hosts: ['authentik.framsburg.ch']
+        - secretName: 'authentik-framsburg-dev-tls'
+          hosts: ['authentik.framsburg.dev']
     volumes:
       - name: postgres-creds
         secret:

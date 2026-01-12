@@ -24,5 +24,3 @@ namespaceResourceBlacklist:
 #    kind: 'DaemonSet'
 
 applications:
-  heimdall: {}
-  uptime-kuma: {}

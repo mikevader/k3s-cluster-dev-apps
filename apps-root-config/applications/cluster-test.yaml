@@ -24,20 +24,5 @@ namespaceResourceBlacklist:
 #    kind: 'DaemonSet'
 
 applications:
-  actual: {}
-  # bouncer: {}
-  # test-helm-test:
-  #   path: cluster-test/test-helm
-  #   destinationNamespace: test-helm-test
-  # test-kustomize-test:
-  #   path: cluster-test/test-kustomize
-  #   destinationNamespace: test-kustomize-test
-  # test-raw-test:
-  #   path: cluster-test/test-raw
-  # databases: {}
-  # dmw-test: {}
-  # firefly: {}
-  # foundryvtt: {}
-  # open-telemetry: {}
-  # recipes: {}
-  # home-assistant: {}
+  heimdall: {}
+  uptime-kuma: {}

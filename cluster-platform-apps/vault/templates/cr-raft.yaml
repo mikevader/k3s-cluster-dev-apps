@@ -36,7 +36,7 @@ spec:
     # See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#ingressspec-v1beta1-extensions
     spec:
       rules:
-        - host: 'vault.framsburg.ch'
+        - host: 'vault.framsburg.dev'
           http:
             paths:
               - path: ''
@@ -47,8 +47,8 @@ spec:
                     port:
                       number: 8200
       tls:
-        - hosts: ['vault.framsburg.ch']
-          secretName: 'vault-framsburg-ch-tls'
+        - hosts: ['vault.framsburg.dev']
+          secretName: 'vault-framsburg-dev-tls'
 
   # A YAML representation of a final vault config file.
   # See https://www.vaultproject.io/docs/configuration/ for more information.
@@ -126,7 +126,7 @@ spec:
           oidc_discovery_url: "${env `OIDC_DISCOVERY_URL`}"
           oidc_client_id: "${env `OIDC_CLIENT_ID`}"
           oidc_client_secret: "${env `OIDC_CLIENT_SECRET`}"
-          allowed_redirect_uris: ["https://vault.framsburg.ch", "https://vault.framsburg.ch/ui/vault/auth/oidc/oidc/callback"]
+          allowed_redirect_uris: ["https://vault.framsburg.dev", "https://vault.framsburg.dev/ui/vault/auth/oidc/oidc/callback"]
           default_role: default
 
         roles:
@@ -134,7 +134,7 @@ spec:
             oidc_scopes: ["openid", "profile", "email"]
             user_claim: sub
             policies: allow_secrets
-            allowed_redirect_uris: ["https://vault.framsburg.ch", "https://vault.framsburg.ch/ui/vault/auth/oidc/oidc/callback"]
+            allowed_redirect_uris: ["https://vault.framsburg.dev", "https://vault.framsburg.dev/ui/vault/auth/oidc/oidc/callback"]
             ttl: 1h
 
     secrets:
@@ -160,7 +160,7 @@ spec:
           name: vault-oidc-secret
           key: oidc-secret
     - name: OIDC_DISCOVERY_URL
-      value: https://authentik.framsburg.ch/application/o/vault/
+      value: https://authentik.framsburg.dev/application/o/vault/
 
   serviceRegistrationEnabled: true
 

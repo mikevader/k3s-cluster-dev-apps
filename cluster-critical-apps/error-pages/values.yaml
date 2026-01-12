@@ -10,12 +10,12 @@ error-pages:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       ingressClassName: traefik
       hosts:
-        - host: error-pages.framsburg.ch
+        - host: error-pages.framsburg.dev
           paths:
             - path: /
               pathType: Prefix
               service:
                 name: error-pages
       tls:
-        - hosts: [error-pages.framsburg.ch]
-          secretName: error-pages-framsburg-ch-tls
+        - hosts: [error-pages.framsburg.dev]
+          secretName: error-pages-framsburg-dev-tls

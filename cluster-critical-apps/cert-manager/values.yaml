@@ -8,7 +8,7 @@ cert-manager:
   dns01RecursiveNameservers: "8.8.8.8:53"
 
   ingressShim:
-    defaultIssuerName: letsencrypt-prod
+    defaultIssuerName: letsencrypt-staging
     defaultIssuerKind: ClusterIssuer
     defaultIssuerGroup: cert-manager.io
 
