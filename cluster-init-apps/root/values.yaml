@@ -1,6 +1,6 @@
 ---
 gitops:
-  repo: https://github.com/mikevader/k3s-cluster-infra-apps.git
+  repo: https://github.com/mikevader/k3s-cluster-dev-apps.git
   revision: master
   app_roots:
 #    - name: cluster-test

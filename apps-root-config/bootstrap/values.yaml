@@ -1,5 +1,5 @@
 ---
-repository: https://github.com/mikevader/k3s-cluster-infra-apps.git
+repository: https://github.com/mikevader/k3s-cluster-dev-apps.git
 bootstrap:
  - name: cluster-init-apps
    # argocdNamespace: asdfasdf

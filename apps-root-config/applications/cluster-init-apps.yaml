@@ -1,4 +1,4 @@
-repository: https://github.com/mikevader/k3s-cluster-infra-apps.git
+repository: https://github.com/mikevader/k3s-cluster-dev-apps.git
 #argocdNamespace: "argocd"
 #server: "https://kubernetes.default.svc"
 subFolder: cluster-init-apps
