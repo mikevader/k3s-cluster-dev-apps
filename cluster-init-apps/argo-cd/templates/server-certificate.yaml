@@ -4,8 +4,6 @@ kind: Certificate
 metadata:
   name: argocd-framsburg-dev-tls
   namespace: argocd-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "20"
 spec:
   secretName: argocd-framsburg-dev-tls
   dnsNames:
