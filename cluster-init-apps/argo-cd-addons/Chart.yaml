@@ -1,0 +1,4 @@
+apiVersion: v2
+name: argo-cd-addons
+description: Bootstrap Chart for Argo CD
+version: 0.1.0

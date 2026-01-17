@@ -36,6 +36,9 @@ applications:
     #     jsonPointers:
     #       - /data/webhook.github.secret
     #       - /metadata/labels
+  argo-cd-addons:
+    disableNamespaceCreation: true
+    destinationNamespace: argocd-system
   bootstrap:
     disableNamespaceCreation: true
     destinationNamespace: argocd-system
