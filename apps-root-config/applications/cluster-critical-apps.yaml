@@ -35,7 +35,7 @@ applications:
 #        skipCrds: true
   longhorn-system: {}
   metallb-system: {}
-  monitoring-stack:
+  monitoring-stack: {}
     # helmServerSideApply: true
   nginx: {}
   nvidia: {}
