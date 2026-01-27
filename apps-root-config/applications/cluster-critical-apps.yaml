@@ -37,9 +37,6 @@ applications:
   metallb-system: {}
   monitoring-stack:
     # helmServerSideApply: true
-    source:
-      helm:
-        skipCrds: true
   nginx: {}
   nvidia: {}
   opnsense: {}
