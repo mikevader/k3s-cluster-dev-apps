@@ -26,7 +26,7 @@ namespaceResourceBlacklist:
 applications:
   cert-manager: {}
   error-pages: {}
-  democratic-csi: {}
+  #democratic-csi: {}
   loki:
     helmServerSideApply: true
     serverSideDiff: true
@@ -37,9 +37,9 @@ applications:
   metallb-system: {}
   monitoring-stack: {}
     # helmServerSideApply: true
-  nginx: {}
-  nvidia: {}
-  opnsense: {}
+  # nginx: {}
+  # nvidia: {}
+  # opnsense: {}
   promtail: {}
   snapshot-controller: {}
   traefik: {}

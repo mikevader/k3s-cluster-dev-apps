@@ -95,7 +95,7 @@ argo-cd:
     #     webhook.github.secret: $argocd-github-secret:webhook.github.secret
 
   redis-ha:
-    enabled: true
+    enabled: false
     exporter:
       enabled: false
   
@@ -120,10 +120,10 @@ argo-cd:
     # autoscaling:
     #   enabled: true
     #   minReplicas: 2
-    replicas: 2
+    replicas: 1
     env:
       - name: ARGOCD_API_SERVER_REPLICAS
-        value: '2'
+        value: '1'
 
     extraArgs:
       - --insecure
@@ -144,7 +144,7 @@ argo-cd:
         enabled: true
 
   repoServer:
-    replicas: 2
+    replicas: 1
     # autoscaling:
     #   enabled: true
     #   minReplicas: 2
