@@ -1,4 +1,9 @@
 vault-operator:
+  crd:
+    enabled: true
+    upgradeJob:
+      enabled: true
+
   crdAnnotations:
       "helm.sh/hook": crd-install
 
