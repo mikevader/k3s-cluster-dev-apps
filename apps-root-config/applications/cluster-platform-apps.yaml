@@ -30,7 +30,7 @@ applications:
   #  serverSideDiff: true
   external-secrets:
     helmServerSideApply: true
-  headlamp: {}
+  # headlamp: {}
   reloader: {}
   # tracing: {}
   vault:
