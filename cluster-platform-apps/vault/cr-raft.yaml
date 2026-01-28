@@ -120,23 +120,6 @@ spec:
             policies: ["allow_secrets"]
             ttl: 1h
 
-      - type: oidc
-        config:
-          role_type: oidc
-          oidc_discovery_url: "${env `OIDC_DISCOVERY_URL`}"
-          oidc_client_id: "${env `OIDC_CLIENT_ID`}"
-          oidc_client_secret: "${env `OIDC_CLIENT_SECRET`}"
-          allowed_redirect_uris: ["https://vault.framsburg.dev", "https://vault.framsburg.dev/ui/vault/auth/oidc/oidc/callback"]
-          default_role: default
-
-        roles:
-          - name: default
-            oidc_scopes: ["openid", "profile", "email"]
-            user_claim: sub
-            policies: allow_secrets
-            allowed_redirect_uris: ["https://vault.framsburg.dev", "https://vault.framsburg.dev/ui/vault/auth/oidc/oidc/callback"]
-            ttl: 1h
-
     secrets:
       - path: secret
         type: kv
@@ -147,20 +130,6 @@ spec:
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
       value: info
-
-  envsConfig:
-    - name: OIDC_CLIENT_ID
-      valueFrom:
-        secretKeyRef:
-          name: vault-oidc-secret
-          key: oidc-id
-    - name: OIDC_CLIENT_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: vault-oidc-secret
-          key: oidc-secret
-    - name: OIDC_DISCOVERY_URL
-      value: https://authentik.framsburg.dev/application/o/vault/
 
   serviceRegistrationEnabled: true
 
@@ -197,17 +166,3 @@ spec:
         resources:
           requests:
             storage: 1Gi
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: oidc-reviewer
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: system:service-account-issuer-discovery
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:unauthenticated
