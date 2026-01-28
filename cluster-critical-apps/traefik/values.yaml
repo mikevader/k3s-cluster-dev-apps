@@ -1,5 +1,4 @@
 traefik:
-  fullnameOverride: traefik
   deployment:
     annotations: {}
       # reloader.stakater.com/match: "true"
@@ -10,15 +9,8 @@ traefik:
     #     volumeMounts:
     #     - mountPath: /data
     #       name: data
-  globalArguments:
-    - "--global.checknewversion"
-    - "--api.dashboard=true"
+  additionalArguments:
     - "--serverstransport.insecureskipverify=true"
-    - "--metrics.prometheus=true"
-    - "--metrics.prometheus.entryPoint=metrics"
-    # - "--entrypoints.websecure.http.middlewares=error-pages-error-pages@kubernetescrd"
-    # - "--entrypoints.websecure.http.middlewares=traefik-https-redirectscheme@kubernetescrd,error-pages-error-pages@kubernetescrd"
-    - "--entrypoints.websecure.http.middlewares=traefik-https-redirectscheme@kubernetescrd"
 
   persistence:
     enabled: false
@@ -79,48 +71,55 @@ traefik:
   #   runAsUser: 0
   # hostNetwork: true
 
-  .DOTrustedIPs: &DOTrustedIPs
-    - "192.168.42.150/32"    # MetalLB IP range
-    - "192.168.42.151/32"    # MetalLB IP range
-    - "192.168.42.152/32"    # MetalLB IP range
-    - "192.168.42.153/32"    # MetalLB IP range
-    - "192.168.42.154/32"    # MetalLB IP range
-    - "192.168.42.155/32"    # MetalLB IP range
-    - "192.168.42.156/32"    # MetalLB IP range
-    - "192.168.42.157/32"    # MetalLB IP range
-    - "192.168.42.158/32"    # MetalLB IP range
-    - "192.168.42.159/32"    # MetalLB IP range
-    - "192.168.42.160/32"    # MetalLB IP range
-    - "192.168.42.161/32"    # MetalLB IP range
-    - "192.168.42.162/32"    # MetalLB IP range
-    - "192.168.42.163/32"    # MetalLB IP range
-    - "192.168.42.164/32"    # MetalLB IP range
-    - "192.168.42.165/32"    # MetalLB IP range
-    - "192.168.42.166/32"    # MetalLB IP range
-    - "192.168.42.167/32"    # MetalLB IP range
-    - "192.168.42.168/32"    # MetalLB IP range
-    - "192.168.42.169/32"    # MetalLB IP range
-    - "192.168.42.0/24"    # MetalLB IP range
-
   ports:
     web:
-      redirections:
-        entrypoint:
-          to: websecure
-          scheme: https
+      http:
+        redirections:
+          entrypoint:
+            to: websecure
+            scheme: https
+            permanent: true
       forwardedHeaders:
-        trustedIPs: *DOTrustedIPs
+        trustedIPs: &DOTrustedIPs
+          - "192.168.42.150/32"    # MetalLB IP range
+          - "192.168.42.151/32"    # MetalLB IP range
+          - "192.168.42.152/32"    # MetalLB IP range
+          - "192.168.42.153/32"    # MetalLB IP range
+          - "192.168.42.154/32"    # MetalLB IP range
+          - "192.168.42.155/32"    # MetalLB IP range
+          - "192.168.42.156/32"    # MetalLB IP range
+          - "192.168.42.157/32"    # MetalLB IP range
+          - "192.168.42.158/32"    # MetalLB IP range
+          - "192.168.42.159/32"    # MetalLB IP range
+          - "192.168.42.160/32"    # MetalLB IP range
+          - "192.168.42.161/32"    # MetalLB IP range
+          - "192.168.42.162/32"    # MetalLB IP range
+          - "192.168.42.163/32"    # MetalLB IP range
+          - "192.168.42.164/32"    # MetalLB IP range
+          - "192.168.42.165/32"    # MetalLB IP range
+          - "192.168.42.166/32"    # MetalLB IP range
+          - "192.168.42.167/32"    # MetalLB IP range
+          - "192.168.42.168/32"    # MetalLB IP range
+          - "192.168.42.169/32"    # MetalLB IP range
+          - "192.168.42.0/24"    # MetalLB IP range
       proxyProtocol:
         trustedIPs: *DOTrustedIPs
     websecure:
+      asDefault: true
       http3:
         enabled: true
       forwardedHeaders:
         trustedIPs: *DOTrustedIPs
       proxyProtocol:
         trustedIPs: *DOTrustedIPs
-      tls:
-        enabled: true
+      http:
+        tls:
+          enabled: true
+        # middlewares:
+          # - "error-pages-error-pages@kubernetescrd"
+          # - "traefik-https-redirectscheme@kubernetescrd,error-pages-error-pages@kubernetescrd"
+          # - traefik-https-redirectscheme@kubernetescrd
+
     cups:
       port: 631
       expose:
@@ -179,9 +178,10 @@ traefik:
       ingressClass: traefik
       publishedService:
         enabled: true
-  rollingUpdate:
-    maxUnavailable: 1
-    maxSurge: 1
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   resources:
     requests:
       cpu: "100m"
@@ -192,7 +192,7 @@ traefik:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 4
+    maxReplicas: 2
     metrics:
       - type: Resource
         resource:
