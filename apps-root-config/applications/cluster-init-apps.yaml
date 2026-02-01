@@ -27,7 +27,7 @@ applications:
   argo-cd: 
     disableNamespaceCreation: true
     destinationNamespace: argocd-system
-    disableAutoSync: true
+    disableAutoSync: false
     # ignoreDifferences:
     #   - group: ""
     #     name: argocd-secret
