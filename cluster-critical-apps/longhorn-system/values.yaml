@@ -4,16 +4,16 @@ longhorn:
 
   persistence:
     defaultClassReplicaCount: 2
-    backupTargetName: default
+#    backupTargetName: default
   defaultSettings:
     concurrentAutomaticEngineUpgradePerNodeLimit: 1
     replicaAutoBalance: disabled # best-effort
     defaultReplicaCount: 2
     createDefaultDiskLabeledNodes: true
     defaultLonghornStaticStorageClass: longhorn
-  defaultBackupStore:
-    backupTarget: 's3://longhorn@us-east-1/backups'
-    backupTargetCredentialSecret: minio2-secret
+#  defaultBackupStore:
+#    backupTarget: 's3://longhorn@us-east-1/backups'
+#    backupTargetCredentialSecret: minio2-secret
 
   metrics:
     serviceMonitor:
