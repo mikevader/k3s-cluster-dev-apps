@@ -6,14 +6,14 @@ kube-prometheus-stack:
       enabled: true
       forceConflicts: true
 
-  kubeApiServer:
-    enabled: true
+#  kubeApiServer:
+#    enabled: true
   kubeControllerManager:
     enabled: false
     endpoints:
-      - 192.168.42.120
-      - 192.168.42.121
-      - 192.168.42.122
+      - 192.168.42.140
+      - 192.168.42.141
+      - 192.168.42.142
     service:
       enabled: true
       port: 10257
@@ -25,9 +25,9 @@ kube-prometheus-stack:
   kubeScheduler:
     enabled: false
     endpoints:
-      - 192.168.42.120
-      - 192.168.42.121
-      - 192.168.42.122
+      - 192.168.42.140
+      - 192.168.42.141
+      - 192.168.42.142
     service:
       enabled: true
       port: 10259
@@ -39,9 +39,9 @@ kube-prometheus-stack:
   kubeProxy:
     enabled: false
     endpoints:
-      - 192.168.42.120
-      - 192.168.42.121
-      - 192.168.42.122
+      - 192.168.42.140
+      - 192.168.42.141
+      - 192.168.42.142
     service:
       enabled: true
       port: 10249
@@ -51,20 +51,16 @@ kube-prometheus-stack:
       https: true
       insecureSkipVerify: true
   kubeEtcd:
-    enabled: true
     endpoints:
-      - 192.168.42.120
-      - 192.168.42.121
-      - 192.168.42.122
-    service:
-      enabled: true
-      port: 2381
-      targetPort: 2381
+      - 192.168.42.140
+      - 192.168.42.141
+      - 192.168.42.142
 
   defaultRules:
-    kubeProxy: false
-    kubeScheduler: false
-    kubeControllerManager: false
+    rules: {}
+#      kubeProxy: false
+#      kubeScheduler: false
+#      kubeControllerManager: false
 
   prometheusOperator:
     admissionWebhooks:
@@ -76,7 +72,6 @@ kube-prometheus-stack:
           kind: "ClusterIssuer"
 
   grafana:
-    useStatefulSet: true
     env:
       GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
       GF_AUTH_GENERIC_OAUTH_NAME: "authentik"
@@ -119,8 +114,6 @@ kube-prometheus-stack:
         - ReadWriteOnce
       size: 10Gi
 
-    serviceMonitor:
-      enabled: true
     sidecar:
       dashboards:
         enabled: true
@@ -228,7 +221,7 @@ kube-prometheus-stack:
       global:
         resolve_timeout: 5m
         slack_api_url_file: '/etc/alertmanager/secrets/slack-api-url/slack_api_url'
-        opsgenie_api_key_file: '/etc/alertmanager/secrets/opsgenie/opsgenie-apikey'
+        # opsgenie_api_key_file: '/etc/alertmanager/secrets/opsgenie/opsgenie-apikey'
       templates: ['/etc/alertmanager/config/**/*.tmpl']
       route:
         group_by: ['job']
@@ -362,7 +355,7 @@ kube-prometheus-stack:
     alertmanagerSpec:
       secrets:
         - slack-api-url
-        - opsgenie
+        # - opsgenie
       externalUrl: https://alertmanager.framsburg.dev
 
   prometheus:
@@ -375,19 +368,6 @@ kube-prometheus-stack:
       enableAdminAPI: true
       retentionSize: 100GB
       retention: 90d
-      walCompression: true
-      podAntiAffinity: soft
-      # affinity:
-      #   nodeAffinity:
-      #     preferredDuringSchedulingIgnoredDuringExecution:
-      #       - weight: 1
-      #         preference:
-      #           matchExpressions:
-      #             - key: kubernetes.io/hostname
-      #               operator: In
-      #               values:
-      #                 - k3smaster3
-      #                 - k3smaster2
       resources:
         requests:
           cpu: 1
@@ -442,16 +422,3 @@ kube-prometheus-stack:
         - secretName: prometheus-framsburg-dev-tls
           hosts:
             - prometheus.framsburg.dev
-
-    # thanosIngress:
-    #   enabled: true
-    #   annotations:
-    #     kubernetes.io/ingress.class: traefik
-    #     cert-manager.io/cluster-issuer: letsencrypt-prod
-    #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    #   hosts:
-    #     - thanos.framsburg.dev
-    #   tls:
-    #     - secretName: thanos-framsburg-dev-tls
-    #       hosts:
-    #         - thanos.framsburg.dev
