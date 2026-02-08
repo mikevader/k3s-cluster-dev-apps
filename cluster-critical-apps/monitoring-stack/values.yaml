@@ -112,7 +112,7 @@ kube-prometheus-stack:
       enabled: true
       accessModes:
         - ReadWriteOnce
-      size: 10Gi
+      size: 5Gi
 
     sidecar:
       dashboards:
@@ -366,8 +366,8 @@ kube-prometheus-stack:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       enableAdminAPI: true
-      retentionSize: 100GB
-      retention: 90d
+      retentionSize: 10GB
+      retention: 5d
       resources:
         requests:
           cpu: 1
@@ -382,7 +382,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 150Gi
+                storage: 20Gi
 
     additionalPodMonitors:
       - name: traefik

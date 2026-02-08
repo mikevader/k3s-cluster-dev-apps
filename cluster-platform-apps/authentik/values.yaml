@@ -72,4 +72,4 @@ postgresql18:
       secretKey: databasePassword
   storage:
     className: longhorn
-    requestedSize: 10Gi
+    requestedSize: 5Gi
