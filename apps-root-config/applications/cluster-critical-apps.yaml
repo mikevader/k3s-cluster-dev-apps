@@ -25,6 +25,9 @@ namespaceResourceBlacklist:
 
 applications:
   cert-manager: {}
+  dex:
+    helmServerSideApply: true
+    serverSideDiff: true
   error-pages: {}
   #democratic-csi: {}
   loki:
